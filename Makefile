@@ -13,11 +13,11 @@ else ifeq ($(TARGET), darwin)
 	# is not set then it's forced to 10.4, which breaks compile on Mojave.
 	export MACOSX_DEPLOYMENT_TARGET = $(shell sw_vers -productVersion)
 	LIBS += -L$(OPENSSL_LIB)/lib
-	CFLAGS += -I$(OPENSSL_LIB)/include
+	CFLAGS += -I$(OPENSSL_LIB)/include "$(pkg-config --cflags luajit)"
 else ifeq ($(TARGET), linux)
         CFLAGS  += -D_POSIX_C_SOURCE=200809L -D_BSD_SOURCE
 	LIBS    += -ldl
-	LDFLAGS += -Wl,-E
+	LDFLAGS += -Wl,-E "$(pkg-config --cflags luajit)"
 else ifeq ($(TARGET), freebsd)
 	CFLAGS  += -D_DECLARE_C99_LDBL_MATH
 	LDFLAGS += -Wl,-E
