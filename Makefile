@@ -17,7 +17,7 @@ else ifeq ($(TARGET), darwin)
 else ifeq ($(TARGET), linux)
         CFLAGS  += -D_POSIX_C_SOURCE=200809L -D_BSD_SOURCE
 	LIBS    += -ldl
-	LDFLAGS += -Wl,-E "$(pkg-config --cflags luajit)"
+	LDFLAGS += -Wl,-E "$(pkg-config --libs luajit)"
 else ifeq ($(TARGET), freebsd)
 	CFLAGS  += -D_DECLARE_C99_LDBL_MATH
 	LDFLAGS += -Wl,-E
