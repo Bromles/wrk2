@@ -50,7 +50,7 @@ $(BIN): $(OBJ)
 	@echo LINK $(BIN)
 	@$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-$(OBJ): config.h Makefile $(LDIR_SRC)/libluajit.a | $(ODIR)
+$(OBJ): config.h Makefile | $(ODIR)
 
 $(ODIR):
 	@mkdir -p $@
@@ -63,19 +63,7 @@ $(ODIR)/%.o : %.c
 	@echo CC $<
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-$(LDIR_SRC)/libluajit.a: download_luajit
-	@echo Building LuaJIT...
-	@$(MAKE) -C $(LDIR_SRC) BUILDMODE=static
-
-download_luajit:
-ifneq ($(wildcard $(LDIR)/.),)
-	@echo LuaJIT was already downloaded, skipping it...
-else
-	@echo Downloading LuaJIT...
-	@git clone https://github.com/LuaJIT/LuaJIT.git -b v2.1 $(LDIR)
-endif
-
-.PHONY: all clean download_luajit
+.PHONY: all clean
 .SUFFIXES:
 .SUFFIXES: .c .o .lua
 
