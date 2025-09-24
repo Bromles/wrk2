@@ -1,6 +1,7 @@
 CFLAGS  := -std=c99 -Wall -O2 -D_REENTRANT
 LIBS    := -lpthread -lm -lcrypto -lssl
 OPENSSL_LIB	:= /opt/homebrew/opt/openssl/
+LUAJIT := /usr/local/bin/luajit
 
 TARGET  := $(shell uname -s | tr '[A-Z]' '[a-z]' 2>/dev/null || echo unknown)
 
@@ -56,7 +57,7 @@ $(ODIR):
 
 $(ODIR)/bytecode.o: src/wrk.lua
 	@echo LUAJIT $<
-	@$(SHELL) -c 'cd $(LDIR_SRC) && ./luajit -b $(CURDIR)/$< $(CURDIR)/$@'
+@$(SHELL) -c 'cd $(LDIR_SRC) && $(LUAJIT) -b $(CURDIR)/$< $(CURDIR)/$@'
 
 $(ODIR)/%.o : %.c
 	@echo CC $<
