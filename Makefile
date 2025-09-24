@@ -1,4 +1,4 @@
-CFLAGS  := -std=c99 -Wall -O2 -D_REENTRANT
+CFLAGS  := -std=c99 -Wall -O2 -D_REENTRANT "$(pkg-config --cflags luajit)"
 LIBS    := -lpthread -lm -lcrypto -lssl
 OPENSSL_LIB	:= /opt/homebrew/opt/openssl/
 LUAJIT := /usr/local/bin/luajit
