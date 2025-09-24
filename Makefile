@@ -57,7 +57,7 @@ $(ODIR):
 
 $(ODIR)/bytecode.o: src/wrk.lua
 	@echo LUAJIT $<
-@$(SHELL) -c 'cd $(LDIR_SRC) && $(LUAJIT) -b $(CURDIR)/$< $(CURDIR)/$@'
+@$(SHELL) -c 'cd $(LDIR_SRC) && luajit -b $(CURDIR)/$< $(CURDIR)/$@'
 
 $(ODIR)/%.o : %.c
 	@echo CC $<
